@@ -100,6 +100,16 @@ const likeButtons = document.querySelectorAll(".like")
 if (likeButtons.length > 0){
   for(const likeButton of likeButtons) {
     likeButton.addEventListener("click", likeCat)
+    //loop over the savedCats array and check if any cat name with this button cat name
+    for (savedCat of savedCats){
+      if (savedCat.name == likeButton.dataset.catname){
+        //update button style
+        likeButton.classList.remove("btn-light")
+        likeButton.classList.add("btn-danger")
+        likeButton.textContent = "Liked"
+      }
+    }
+
 
   }
 }
@@ -118,15 +128,19 @@ function likeCat(e){
   console.log(catExist)
 
 // if the catName existed we will get a number from findCat function
-if(catExist >= 0){
+if(catExist !== null){
   //display an alert to user
   alert("This cat is already liked")
 } else {
   // the findCat method did not return a number 
-  //push the cat object 
+  //push the cat object to savedCats array
     savedCats.push(catInfo)
-
+  // stringify the savedCats array and add it  to localStorage mycats 
     localStorage.setItem("mycats", JSON.stringify(savedCats))
+  //upd
+  this.classList.remove("btn-light")
+  this.classList.add("btn-danger")
+  this.textContent = "Liked"
 }
 }
 
