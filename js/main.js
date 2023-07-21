@@ -50,6 +50,8 @@ const cats = [
 ]
 
 const catsRow = document.getElementById("catsRow")
+if (catsRow){}
+
 // loop over the array of data
 for(const cat of cats) {
   console.log(cat.name)
@@ -151,4 +153,35 @@ function findCat (catName) {
     }
   }
   return null
+}
+
+//liked Cats page
+
+
+//display cats from Savedcats
+
+const likedCatsRow = document.getElementById("likedCatsRow")
+
+if(likedCatsRow){
+  //if savedCats array contains one or more cats then display the cats
+  if(savedCats.length > 0){
+    const likedCards = []
+    for(const cat of savedCats){
+      const card = `<div class="col">
+                      <div class="card">
+                        <img data-bs-toggle="modal" data-bs-target="#exampleModal" src="${cat.thumb}" data-fullimg = "${cat.img}" class="card-img-top" alt="placeholder kitten">
+                        <div class="card-body">
+                          <h5 class="card-title">${cat.name}</h5>
+                          <p class="card-text">${cat.bio}</p>
+                          <a href="#" class="btn btn-light remove" data-catname = "${cat.name}" data-catbio = "${cat.bio}" data-catthumb = "${cat.thumb}" data-catfulling = "${cat.img}">Romove</a>
+                        </div>
+                      </div>
+                   </div>`
+      likedCards.push(card)
+    }
+    likedCatsRow.innerHTML = likedCards.join("")
+  } else {
+    //display message that no cats were found
+
+  }
 }
