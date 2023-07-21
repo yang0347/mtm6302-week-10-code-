@@ -59,7 +59,7 @@ for(const cat of cats) {
       <div class="card-body">
         <h5 class="card-title">${cat.name}</h5>
         <p class="card-text">${cat.bio}</p>
-        <a href="#" class="btn btn-light like">Like</a>
+        <a href="#" class="btn btn-light like" data-catname = "${cat.name}" data-catbio = "${cat.bio}" data-catthumb = "${cat.thumb}" data-catfulling = "${cat.img}">Like</a>
       </div>
     </div>
 </div>`
@@ -85,10 +85,43 @@ function openModal (e) {
 
 /* week 11 */
 
+  //get the savedCats from localstorage 
+  let savedCats = localStorage.getItem("mycats")
+  //if the saved cats are null then !savedcats will be true
+  if (!savedCats){
+    // set savedCats to empty array
+    savedCats = []
+  } else {
+    // is savedCats is not null (be ture) then set savedCats to parsed value of savedCats
+    savedCats = JSON.parse(savedCats)
+  }
+
 const likeButtons = document.querySelectorAll(".like")
 if (likeButtons.length > 0){
   for(const likeButton of likeButtons) {
     likeButton.addEventListener("click", likeCat)
 
   }
+}
+
+function likeCat(e){
+  e.preventDefault()
+  const catName = this.dataset.catname
+  const catBio = this.dataset.catBio
+  const catThumb = this.dataset.catthumb
+  const catImg = this.dataset.catfulling
+  const catInfo = {name: catName, bio: catBio, thumb: catThumb, img: catImg}
+  console.log(catInfo)
+
+
+  const catExist = findCat(catName)
+}
+
+function findCat (catName) {
+  for (const savedCat of savedCats){
+    if (savedCat.name == catName){
+      return savedCats.indexOf(savedCat)
+    }
+  }
+  return null
 }
