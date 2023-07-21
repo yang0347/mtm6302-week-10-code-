@@ -59,7 +59,7 @@ for(const cat of cats) {
       <div class="card-body">
         <h5 class="card-title">${cat.name}</h5>
         <p class="card-text">${cat.bio}</p>
-        <a href="#" class="btn btn-light">Like</a>
+        <a href="#" class="btn btn-light like">Like</a>
       </div>
     </div>
 </div>`
@@ -83,4 +83,12 @@ function openModal (e) {
   }
 }
 
+/* week 11 */
 
+const likeButtons = document.querySelectorAll(".like")
+if (likeButtons.length > 0){
+  for(const likeButton of likeButtons) {
+    likeButton.addEventListener("click", likeCat)
+
+  }
+}
