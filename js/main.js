@@ -113,8 +113,21 @@ function likeCat(e){
   const catInfo = {name: catName, bio: catBio, thumb: catThumb, img: catImg}
   console.log(catInfo)
 
-
+//check if the catName exists in the array from localStorage
   const catExist = findCat(catName)
+  console.log(catExist)
+
+// if the catName existed we will get a number from findCat function
+if(catExist >= 0){
+  //display an alert to user
+  alert("This cat is already liked")
+} else {
+  // the findCat method did not return a number 
+  //push the cat object 
+    savedCats.push(catInfo)
+
+    localStorage.setItem("mycats", JSON.stringify(savedCats))
+}
 }
 
 function findCat (catName) {
